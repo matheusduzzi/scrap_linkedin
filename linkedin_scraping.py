@@ -3,12 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
-import csv
-
-# arquivo csv
-writer = csv.writer(open('output.csv', 'w', encoding='utf-8'))
-writer.writerow(['Nome', 'Headline', 'URL'])
-
 
 # Chrome diver
 driver = webdriver.Chrome('./chromedriver')
@@ -23,12 +17,10 @@ driver.get('https://www.linkedin.com/')
 sleep(1)
 
 # clicar no botão de login
-# driver.find_element_by_css_selector('a.nav__button-secondary').click()
 driver.find_element_by_xpath('/html/body/nav/a[3]').click()
 sleep(3)
 
 # preencher usuario
-# usuario_input = driver.find_element_by_css_selector('input#username')
 usuario_input = driver.find_element_by_name('session_key')
 usuario_input.send_keys('seuemail')
 
@@ -37,8 +29,6 @@ senha_input = driver.find_element_by_name('session_password')
 senha_input.send_keys('suasenha')
 
 # clicar para logar
-# driver.find_element_by_css_selector("button.btn__primary--large").click()
-# driver.find_element_by_xpath('//button[text()="Sign in"]').click()
 senha_input.send_keys(Keys.RETURN)
 sleep(3)
 
@@ -47,7 +37,6 @@ driver.get('https://google.com')
 sleep(1)
 
 # selecionar campo de busca
-# campo_busca = driver.find_element_by_xpath('//input[@name="q"]')
 busca_input = driver.find_element_by_name('q')
 
 # fazer busca no google
@@ -104,7 +93,6 @@ for perfil in lista_perfil:
         driver.find_element_by_xpath('//button[normalize-space()="Conectar"]').click()
         sleep(1)
     except: NoSuchElementException
-    # handle the element not existing
     
     try:
         driver.find_element_by_xpath('//button[normalize-space()="Concluído"]') .click()
